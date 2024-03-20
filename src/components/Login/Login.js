@@ -14,11 +14,20 @@ const Login = (props) => {
   const [formIsValid, setFormIsValid] = useState(false);
 
   useEffect(()=>{
-    setFormIsValid(
-      enteredEmail.includes('@') 
-      && enteredPassword.trim().length > 6
-      &&  enteredCollegename.trim().length>0
-    );
+    
+   const identifier= setTimeout(()=>{
+      console.log('Checking form Validity !')
+      setFormIsValid(
+        enteredEmail.includes('@') 
+        && enteredPassword.trim().length > 6
+        &&  enteredCollegename.trim().length>0
+      );
+    },500)
+    
+   return ()=>{
+    console.log('CLEANUP');
+    clearTimeout(identifier);
+   };
   },[enteredEmail,enteredPassword,enteredCollegename]);
 
   const emailChangeHandler = (event) => {
